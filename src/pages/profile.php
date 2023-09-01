@@ -122,13 +122,10 @@ userLoggedIn();
                     </div>
 
                     <div class="item__right column">
-                        <?php if(isset($_SESSION['nick-error'])):?>
-                            <div class="alert alert-danger"><?php echo $_SESSION['nick-error'];?></div>
-                            <?php unset($_SESSION['nick-error']);?>
-                        <?php elseif(isset($_SESSION['nick-msg'])):?>
-                            <div class="alert alert-success"><?php echo $_SESSION['nick-msg'];?></div>
-                            <?php unset($_SESSION['nick-msg']);?>
-                        <?php endif;?>
+
+                        <!--предупреждение об ошибке-->
+                        <?php getWarning('profile-nick');?>
+
                         <form action="../data/profile.php" method="post" class="item__form">
                             <input type="text" class="item__input nickname__inp" name="old-nick" placeholder="Ваш ник: <?php echo $_SESSION['user']['nick'] ?>">
                             <input type="text" class="item__input nickname__inp" name="new-nick" placeholder="Новый ник">
@@ -147,15 +144,12 @@ userLoggedIn();
                         </div>
                     </div>
                     <div class="item__right column">
-                        <?php if(isset($_SESSION['pass-error'])):?>
-                            <div class="alert alert-danger"><?php echo $_SESSION['pass-error'];?></div>
-                            <?php unset($_SESSION['pass-error']);?>
-                        <?php elseif(isset($_SESSION['pass-msg'])):?>
-                            <div class="alert alert-success"><?php echo $_SESSION['pass-msg'];?></div>
-                            <?php unset($_SESSION['pass-msg']);?>
-                        <?php endif;?>
+
+                        <!--предупреждение об ошибке-->
+                        <?php getWarning('profile-pass');?>
+
                         <form action="../data/profile.php" method="post" class="item__form">
-                            <input type="password" class="item__input password__inp" name="pass" placeholder="Пароль">
+                            <input type="password" class="item__input password__inp" name="old-pass" placeholder="Пароль">
                             <input type="password" class="item__input password__inp" name="new-pass" placeholder="Новый пароль">
                             <input type="password" class="item__input password__inp" name="new-rpass" placeholder="Повторите пароль">
 
