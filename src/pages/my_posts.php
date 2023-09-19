@@ -36,7 +36,7 @@ $drafts = readDataToDB($db, 'not_public_posts', ['*'], ['author_id' => $_SESSION
     <div class="container">
         <div class="my-posts__content">
 
-            // Создает список постов
+            <!-- Создает список постов -->
             <?php RowPosts("Опубликованные посты", $public_posts, true); ?>
             <?php RowPosts("Черновики", $drafts, false); ?>
 

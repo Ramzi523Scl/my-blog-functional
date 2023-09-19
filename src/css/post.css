@@ -1,0 +1,40 @@
+.post {
+  background-color: #f5f5f5;
+  padding-bottom: 40px;
+}
+.post__content {
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+.post__item:not(:last-child) {
+  margin-bottom: 20px;
+}
+.post__nick {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+.post__nick:hover {
+  color: #64ded7;
+}
+.post__date {
+  display: block;
+  text-align: end;
+}
+.post__date i {
+  font-size: 13px;
+  color: #909090;
+}
+.post__img {
+  margin: 20px 0;
+}
+.post__img img {
+  display: block;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=post.css.map */

@@ -1,12 +1,14 @@
 <?php
 $db = include("../database/connect_db.php");
 include("../database/queriesToDB.php");
-include ("../function/definePostTable.php");
+include("../function/definePostTable.php");
+include("../function/deletePost.php");
+include("../function/getSegmentsFromURL.php");
 
 session_start();
 
 // Получение url пути
-$path = getPath();
+$path = getSegmentsFromURL();
 
 // Получаю нужную информацию о посте через url
 // К примеру: http://my-blog2/src/pages/my_posts.php/open/12/public
@@ -16,30 +18,29 @@ $path = getPath();
 [$whatToDo, $id, $publicOrDraft] = explode('/', $path);
 $table = definePostTable($publicOrDraft);
 
+// Получаю список кнопок, необходимый для следуйщей странички
+// И записываю их и данные о посте в сессию
+$buttons = getButtons($publicOrDraft);
+$_SESSION['post'] = ['public-or-draft' => $publicOrDraft, 'btns' => $buttons];
+
 // Тут решаю какую функцию запустить, в зависимости от того что хочет пользователь
 if ($whatToDo === 'open') openPost($db, $table, (int) $id);
-if ($whatToDo === 'delete') deletePost($db, $table, (int) $id);
+if ($whatToDo === 'delete') deletePost($db, $table, (int) $id, 'my_posts');
 exit();
 
 
-
-function getPath(): string
+function getButtons(string $publicOrDraft): array
 {
-    return str_replace($_SERVER['SCRIPT_NAME'] . '/', "",$_SERVER['REQUEST_URI']);
+    $buttons = ['delete', 'edit' ];
+    if ($publicOrDraft === 'draft') $buttons[] = 'publish';
+    return $buttons;
 }
-
 function openPost(PDO $db, string $table, int $id ): void
 {
     $post = readDataToDB($db, $table, ['*'], ['id' => $id]);
-    $_SESSION['post'] = $post;
+
+    $_SESSION['post'] += $post;
     $url = 'http://my-blog2/src/pages/' . 'post.php';
     header("Location: $url");
 }
 
-function deletePost(PDO $db, string $table, int $id): void
-{
-    removeDataToDB($db, $table, ['id' => $id]);
-
-    $url = $_SERVER['HTTP_REFERER'];
-    header("Location: $url");
-}
