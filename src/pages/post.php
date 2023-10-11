@@ -11,7 +11,13 @@ userLoggedIn();
 if (!checkAccessToThisPage('my_posts')) goToPage('my_posts');
 
 $post = $_SESSION['post'];
-$nick = $_SESSION['user']['nick'];
+$nick = $_SESSION['user']['nick']; // ненужен
+$links = [
+    'delete' => '../data/post.php/delete',
+    'edit' => '../data/post.php/edit',
+    'save' => '../data/post.php/save',
+    'publish' => '../data/post.php/publish',
+];
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +49,7 @@ $nick = $_SESSION['user']['nick'];
             <div class="post__date post__item">Пост написан: <i class=""><?php echo $post['post_date'];?></i></div>
         </div>
 
-        <?php Buttons($post['btns']); ?>
+        <?php Buttons($post['btns'], 'a', $links); ?>
     </div>
 </main>
 

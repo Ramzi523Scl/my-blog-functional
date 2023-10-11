@@ -2,11 +2,12 @@
 $db = include('../database/connect_db.php');
 include('../database/queriesToDB.php');
 include('../function/checkEmptyFields.php');
-include('../function/recordWarning.php');
 include('../function/postSaveSession.php');
 include('../function/whichFieldsEmpty.php');
 include('../function/whereManyCharacters.php');
 include('../function/createHash.php');
+include('../function/clearField.php');
+include('../function/saveWarningInSession.php');
 
 session_start();
 
@@ -44,18 +45,22 @@ function createPost($db) {
     ];
 
     // Очищает поля при нажатии на кнопку очистить
-    if ($_POST['clear-btn']) clearField($fieldsName + ['post-img'], '../pages/create_post.php');
+    if ($_POST['clear-btn']) {
+        clearField($fieldsName + ['post-img']);
+        goToPage('create_post');
+        exit();
+    }
 
     // Сохраняет данные поста в сессию, чтобы отобразить их при обновлении страницы
-    postSaveSession($fieldsName);
+    postSaveSession($fieldsName, $_POST);
 
     // Если поля пустые, то выводит предупреждение о том что нужно заполнить поля
     $is_empty_fields = whichFieldsEmpty($fieldsName);
-    saveWarningInSession($is_empty_fields, ['create-post', 'error', 'Заполните пустые места'],  '../pages/create_post.php');
+    saveWarningInSession($is_empty_fields, ['create-post', 'error', 'Заполните пустые места'],  'create_post');
 
     // Если пользователь ввел больше символов в полях, чем нужно выводит предупреждение
     $fields_with_error = whereManyCharacters($fieldsName, [55, 200, 2500]);
-    saveWarningInSession($fields_with_error, ['create-post', 'error', 'Слишком много символов'],  '../pages/create_post.php');
+    saveWarningInSession($fields_with_error, ['create-post', 'error', 'Слишком много символов'],  'create_post');
 
     // Создает ассоциативный массив данных, которые нужно добавить в БД
     $postData = createHash($columnNamesInBD, $value);
@@ -66,32 +71,8 @@ function createPost($db) {
     // Предупреждает пользователя о том что пост сохранен
     // И очищает все поля
     recordWarning('create-post', 'success', 'Пост успешно сохранен');
-    clearField($fieldsName + ['post-img'], '../pages/create_post.php');
+    clearField($fieldsName + ['post-img']);
+    goToPage('create_post');
     exit();
 
 }
-
-
-# TODO Вынести эти функции в общие функции, если они пригодятся
-function clearField(array $fieldsName, string $location)
-{
-    foreach ($fieldsName as $field) {
-        unset($_SESSION[$field]);
-    }
-    header("Location: $location");
-    exit();
-}
-
-function saveWarningInSession(array $fields, array $warning, string $location)
-{
-    if ($fields) {
-        foreach ($fields as $field) $_SESSION[$field . '-error'] = true;
-        recordWarning($warning[0], $warning[1], $warning[2]);
-        header("Location: $location");
-        exit();
-    }
-
-}
-
-
-

@@ -72,6 +72,5 @@ function updateDataToDB(PDO $connection, string $tableName, array $updateData, a
     foreach (($updateData + $whereData) as $key => $value) {
         $statement->bindValue(":$key", $value);
     }
-    var_dump($query);
     $statement->execute();
 }

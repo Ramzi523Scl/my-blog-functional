@@ -1,5 +1,5 @@
 <?php
-function createURL(string $page): string
+function createURL(string $dir, string $page): string
 {
-    return "http://my-blog2/src/pages/$page.php";
+    return "http://my-blog2/$dir/$page.php";
 }

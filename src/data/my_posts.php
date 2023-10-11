@@ -4,6 +4,7 @@ include("../database/queriesToDB.php");
 include("../function/definePostTable.php");
 include("../function/deletePost.php");
 include("../function/getSegmentsFromURL.php");
+include("../function/getButtons.php");
 
 session_start();
 
@@ -20,7 +21,7 @@ $table = definePostTable($publicOrDraft);
 
 // Получаю список кнопок, необходимый для следуйщей странички
 // И записываю их и данные о посте в сессию
-$buttons = getButtons($publicOrDraft);
+$buttons = getButtons(['delete', 'edit'], ['publish'], $publicOrDraft === 'draft');
 $_SESSION['post'] = ['public-or-draft' => $publicOrDraft, 'btns' => $buttons];
 
 // Тут решаю какую функцию запустить, в зависимости от того что хочет пользователь
@@ -29,12 +30,6 @@ if ($whatToDo === 'delete') deletePost($db, $table, (int) $id, 'my_posts');
 exit();
 
 
-function getButtons(string $publicOrDraft): array
-{
-    $buttons = ['delete', 'edit' ];
-    if ($publicOrDraft === 'draft') $buttons[] = 'publish';
-    return $buttons;
-}
 function openPost(PDO $db, string $table, int $id ): void
 {
     $post = readDataToDB($db, $table, ['*'], ['id' => $id]);

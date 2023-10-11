@@ -28,10 +28,11 @@ $userData = [
     'nickname' => $_POST['nickname'],
     'password' => password_hash($_POST['pass'], PASSWORD_DEFAULT),
 ];
-addDataToDB($db, 'users_login', $userData); // добавляет пользователя в бд
-userLoginSaveSession($userData);                      // добавляет данные пользователя в сессию
+addDataToDB($db, 'users_login', $userData);                                                      // добавляет пользователя в бд
+$newUserData = readDataToDB($db, 'users_login', ['*'], ['nickname' => $userData['nickname']]);   // Получаю новую инфу о пользователе с бд
+userLoginSaveSession($newUserData);                                                                       // добавляет данные пользователя в сессию
 header("Location: ../pages/profile.php");
-exit();                                                // КОНЕЦ КОДА!!!
+exit();                                                                           // КОНЕЦ КОДА!!!
 
 
 function userValidation($db, array $userData): bool {
