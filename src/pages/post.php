@@ -8,7 +8,7 @@ include("../function/checkAccessToThisPage.php");
 session_start();
 userLoggedIn();
 
-if (!checkAccessToThisPage('my_posts')) goToPage('my_posts');
+if (!checkAccessToThisPage(['my_posts'])) goToPage('index');
 
 $post = $_SESSION['post'];
 $nick = $_SESSION['user']['nick']; // ненужен
@@ -34,7 +34,7 @@ $links = [
 </head>
 <body>
 
-<?php Menu();?>
+<?php Menu('my_posts');?>
 
 <main class="post">
     <div class="container">

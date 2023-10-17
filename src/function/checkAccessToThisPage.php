@@ -1,5 +1,10 @@
 <?php
-function checkAccessToThisPage(string $availableFromPage): bool
+function checkAccessToThisPage(array $availableFromPages): bool
 {
-    return $_SERVER['HTTP_REFERER'] === "http://my-blog2/src/pages/$availableFromPage.php";
+    foreach($availableFromPages as $page) {
+        $availableFrom = ($page === 'index') ? "http://my-blog2/$page.php" : "http://my-blog2/src/pages/$page.php";
+        $whereFrom = $_SERVER['HTTP_REFERER'];
+        if($availableFrom === $whereFrom) return true;
+    }
+    return false;
 }

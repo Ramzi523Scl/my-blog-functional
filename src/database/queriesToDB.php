@@ -1,5 +1,5 @@
 <?php
-include('../function/getWhereCondition.php');
+include(__DIR__ . '/../function/getWhereCondition.php');
 
 // Функция добавления данных в бд
 function addDataToDB(PDO $connection, string $tableName, array $data) {

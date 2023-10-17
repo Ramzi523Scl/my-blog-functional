@@ -30,7 +30,7 @@ $buttons = ($condition) ? array(['clear'], ['publish']) : array(['clear', 'save'
 </head>
 <body>
 
-<?php Menu(); ?>
+<?php Menu('my_posts'); ?>
 
 
 <main class="post">

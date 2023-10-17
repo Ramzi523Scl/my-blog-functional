@@ -23,7 +23,7 @@ userLoggedIn();
 <body>
 
 
-<?php Menu(); ?>
+<?php Menu('create_post'); ?>
 
 <main class="post">
     <div class="container">

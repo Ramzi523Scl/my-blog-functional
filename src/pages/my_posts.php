@@ -6,6 +6,7 @@ include('../function/getWarning.php');
 include('../database/queriesToDB.php');
 $db = include('../database/connect_db.php');
 
+
 session_start();
 userLoggedIn();
 
@@ -30,7 +31,7 @@ $drafts = readDataToDB($db, 'not_public_posts', ['*'], ['author_id' => $_SESSION
 </head>
 <body>
 
-<?php Menu(); ?>
+<?php Menu('my_posts'); ?>
 
 <main class="my-posts">
     <div class="container">

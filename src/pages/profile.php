@@ -22,7 +22,7 @@ userLoggedIn();
 <body>
 
 <!--импортирет меню-->
-<?php Menu();?>
+<?php Menu('profile');?>
 
 <div class="profile">
     <div class="container">
