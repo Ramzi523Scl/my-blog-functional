@@ -8,13 +8,19 @@ p, h4 {
   flex-direction: column;
   align-items: center;
 }
+.profile__content {
+  width: 100%;
+}
 .profile__my-name {
   display: flex;
   margin-top: 100px;
   margin-bottom: 35px;
 }
-.profile__content {
-  width: 100%;
+.profile__btn-delete {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 35px;
 }
 .profile__item {
   margin-bottom: 25px;

@@ -41,7 +41,7 @@
   margin: 20px;
 }
 .post__img img {
-  display: inline;
+  display: block;
   margin: 0 auto;
   max-height: 400px;
 }

@@ -1,15 +1,28 @@
 <?php
-$db = include('../database/connect_db.php');
-include('../database/queriesToDB.php');
-include('../function/userDataSaveSession.php');
-include('../function/checkEmptyFields.php');
-include('../function/recordWarning.php');
-include('../function/isEqual.php');
-
+$db = include(__DIR__ . '/../database/connect_db.php');
+include(__DIR__ . '/../database/queriesToDB.php');
+include(__DIR__ . '/../function/userDataSaveSession.php');
+include(__DIR__ . '/../function/checkEmptyFields.php');
+include(__DIR__ . '/../function/recordWarning.php');
+include(__DIR__ . '/../function/isEqual.php');
+include(__DIR__ . '/../function/getSegmentsFromURL.php');
+include(__DIR__ . '/../function/goToPage.php');
 
 session_start();
+$userID = $_SESSION['user']['id'];
 $userLoginInDB = readDataToDB($db, 'users_login', ['*'], ['id' => $_SESSION['user']['id']]);
 $userInfoInDB = readDataToDB($db, 'users_info', ['*'], ['user_login_id' => $_SESSION['user']['id']]);
+
+$isDelete = getSegmentsFromURL();
+
+if($isDelete === 'delete') {
+    removeDataToDB($db, 'not_public_posts', ['author_id' => $userID]);
+    removeDataToDB($db, 'public_posts', ['author_id' => $userID]);
+    removeDataToDB($db, 'users_info', ['user_login_id' => $userID]);
+    removeDataToDB($db, 'users_login', ['id' => $userID]);
+    session_unset();
+    goToPage('index');
+}
 
 if ($_POST['info-btn']) {
     $userInfo = [

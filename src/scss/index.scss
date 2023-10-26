@@ -8,6 +8,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+
   &:not(:last-child) {
     margin: 0 0 50px;
   }
@@ -40,7 +41,7 @@
     margin: 20px;
   }
   &__img img {
-    display: inline;
+    display: block;
     margin: 0 auto;
     max-height: 400px;
   }

@@ -27,14 +27,18 @@ userLoggedIn('sign_in');
 <div class="profile">
     <div class="container">
         <div class="profile__body">
-            <div class="profile__my-name my-name">
-                <div class="my-name__item my-name__img d-flex align-items-center">
-                    <img src="../images/ava.svg" alt="Logo" width="70" height="70" class="d-inline-block align-text-top">
+            <div class="profile__content d-flex justify-content-around">
+                <div class="profile__my-name my-name">
+                    <div class="my-name__item my-name__img d-flex align-items-center">
+                        <img src="../images/ava.svg" alt="Logo" width="70" height="70" class="d-inline-block align-text-top">
+                    </div>
+                    <div class="my-name__item my-name__info ">
+                        <p class="fs-3 fw-bold"><?php echo $_SESSION['user']['nick']; ?></p>
+                        <p class="fs-6"><?php echo $_SESSION['user']['email']; ?></p>
+                    </div>
                 </div>
-                <div class="my-name__item my-name__info ">
-                    <p class="fs-3 fw-bold"><?php echo $_SESSION['user']['nick']; ?></p>
-                    <p class="fs-6"><?php echo $_SESSION['user']['email']; ?></p>
-
+                <div class="profile__btn-delete">
+                    <a class="btn btn-danger" role="button" aria-disabled="true" href="http://my-blog2/src/data/profile.php/delete">Удалить аккаунт</a>
                 </div>
             </div>
             <div class="profile__content">
