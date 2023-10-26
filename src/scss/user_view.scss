@@ -1,0 +1,119 @@
+
+.user {
+  background-color: #f0f0f0;
+  box-sizing: border-box;
+  min-height: 92.5vh;
+  margin: 0;
+  padding: 0;
+
+  &__content {
+  }
+  &__item {
+    background-color: white;
+    padding: 14px;
+    border-radius: 2px;
+
+  }
+  &__item:last-child {
+    margin-top: 15px;
+  }
+  &__card {
+
+
+  }
+  &__card span {
+    font-weight: bold;
+    font-size: 22px;
+  }
+  &__card p {
+    font-size: 14px;
+  }
+  &__menu {
+    padding-bottom: 10px;
+  }
+  &__profile {
+
+  }
+  &__profile b {
+    display: block;
+    font-size: 16px;
+  }
+  &__profile p {
+    font-size: 15px;
+  }
+  &__posts {}
+  &__post {
+    margin-bottom: 15px;
+  }
+}
+.posts {
+  background-color: #f0f0f0;
+  padding: 50px 5px;
+}
+
+.post {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-child) {
+    margin: 0 0 50px;
+  }
+  &__item:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  &__nick {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: ease 0.3s;
+  }
+  &__nick:hover {
+    color: #64ded7;
+  }
+  &__date {
+    font-size: 13px;
+    color: #909090;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+  &__description {
+    font-size: 16px;
+    word-break: break-all;
+    margin-right: 20px;
+  }
+
+  &__img img {
+    display: block;
+    margin: 0 auto;
+    max-height: 150px;
+  }
+  &__btn {
+    text-decoration: none;
+    border: 2px solid #64ded7;
+    border-radius: 5px;
+    color: #64ded7;
+    text-align: center;
+    width: 130px;
+    padding: 5px;
+    cursor: pointer;
+    transition: ease 0.8s;
+  }
+  &__btn:hover {
+    background-color: #64ded7;
+    color: white;
+  }
+  &__text {
+    flex: 1 0 80%;
+  }
+  &__image {
+    flex: 0 0 150px;
+  }
+}
+
+

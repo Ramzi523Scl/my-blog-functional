@@ -4,7 +4,7 @@ include('../function/userLoggedIn.php');
 include('../function/getWarning.php');
 
 session_start();
-userLoggedIn();
+userLoggedIn('sign_in');
 
 ?>
 <!DOCTYPE html>

@@ -1,6 +1,7 @@
 
 <?php
-include('../function/getWarning.php');
+include(__DIR__ . "/../function/getWarning.php");
+include(__DIR__ . "/../components/menu.php");
 session_start();
 ?>
 <!DOCTYPE html>
@@ -17,6 +18,7 @@ session_start();
 </head>
 <body>
 
+<?php Menu();?>
 <div class="regist">
     <div class="container">
         <div class="regist__body">

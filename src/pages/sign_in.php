@@ -1,6 +1,7 @@
 
 <?php
-include ('../function/getWarning.php');
+include (__DIR__ . "/../function/getWarning.php");
+include(__DIR__ . "/../components/menu.php");
 session_start();
 
 ;?>
@@ -17,7 +18,7 @@ session_start();
     <title>Авторизация</title>
 </head>
 <body>
-
+<?php Menu();?>
 <div class="sing-in">
     <div class="container">
         <div class="sing-in__body">
